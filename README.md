@@ -1,6 +1,6 @@
-_D_e_t_e_c_t_i_n_g _B_r_e_a_k_p_o_i_n_t_s _a_n_d _E_s_t_i_m_a_t_i_n_g _S_e_g_m_e_n_t_s _i_n _T_r_e_n_d (_D_B_E_S_T)
+##Detecting Breakpoints and Estimating Segments in Trend (DBEST)
 
-_D_e_s_c_r_i_p_t_i_o_n:
+###Description:
 
      A program for analyzing vegetation time series, with two
      algorithms: 1) change detection algorithm that detects trend
@@ -12,24 +12,24 @@ _D_e_s_c_r_i_p_t_i_o_n:
      control the generalization process by setting an additional
      parameter of generalization-percentage.
 
-_U_s_a_g_e:
+###Usage:
 
      DBEST(data, data.type, seasonality = -1, algorithm, breakpoints.no = -1, 
      generalization.percent = -1, change.magnitude = -1, first.level.shift, 
      second.level.shift, duration, distance.threshold, alpha, plot = -1)
      
-_A_r_g_u_m_e_n_t_s:
+###Arguments:
 
-    data: univariate time-series to be analysed. This should be an
+    **data:** univariate time-series to be analysed. This should be an
           object of class 'ts'/'zoo' with a frequency greater than one
           without NA's or a vector without NA's. If the input data is a
           vector the algorithm will automatically assign a start year.
 
-data.type: the data type. There are two options: "cyclical" for time
+**data.type:** the data type. There are two options: "cyclical" for time
           series with a seasonal cycle, or "non-cyclical" for time
           series without seasonal cycle (e.g. deseasonalized data)
 
-seasonality: the seasonality period as a number. If the input data type
+**seasonality:** the seasonality period as a number. If the input data type
           is non-cyclical this variable should be omitted or set to
           'none'/'null'. This parameter will overwrite the frequency
           value of an input object of class 'ts'/'zoo'. However, if the
@@ -37,53 +37,53 @@ seasonality: the seasonality period as a number. If the input data type
           seasonality period is omitted, then the algorithm will use as
           a seasonality period the frequency value from the input data.
 
-algorithm: the algorithm mode. There are two options: "change
+**algorithm:** the algorithm mode. There are two options: "change
           detection" and "generalization".
 
-breakpoints.no: the number of greatest changes to be detected (change
+**breakpoints.no:** the number of greatest changes to be detected (change
           detection algorithm); the number of major breakpoints to be
           included in the generalized trend (generalization algorithm).
           This parameter should be omitted if 'generalization.percent'
           or 'change.magnitude' is in use.
 
-change.magnitude: the lowest magnitude for the changes to be detected
+**change.magnitude:** the lowest magnitude for the changes to be detected
           (change detection algorithm); the largest variation allowed
           within a generalized segment (generalization algorithm). This
           parameter should be omitted if 'breakpoints.no' or
           'generalization.percent' is in use.
 
-generalization.percent: the highest percent (between 0 to 100) the
+**generalization.percent:** the highest percent (between 0 to 100) the
           trend should be generalized; (0 = the least-simplified trend;
           100 = the most-simplified trend). This parameter should be
           omitted if 'breakpoints.no' or 'change.magnitude' is in use.
 
-first.level.shift: the first level-shift-threshold value. This
+**first.level.shift:** the first level-shift-threshold value. This
           parameter corresponds to the lowest absolute difference in
           the time-series data between the level-shift point (abrupt
           change) and the next data point.
 
-second.level.shift: the second level-shift-threshold value. This
+**second.level.shift:** the second level-shift-threshold value. This
           parameter corresponds to the lowest absolute difference in
           the means of the data calculated over the duration period
           before and after the level-shift point.
 
-duration: the duration threshold value. This parameter corresponds to
+**duration:** the duration threshold value. This parameter corresponds to
           the lowest time period (time steps) within which the shift in
           the mean of the data level, before and after the level-shift
           point, persists; and, the lowest spacing (time steps) between
           successive level-shift points.
 
-distance.threshold: the distance threshold value. This correspond to
+**distance.threshold:** the distance threshold value. This correspond to
           the the lowest perpendicular distance from farthest data
           point to the straight line passing through every pair of
           successive peak and valley points. The algorithm will
           estimate a distance threshold if this parameter is set to
           'default'.
 
-   alpha: the statistical significance level value used for testing the
+   **alpha:** the statistical significance level value used for testing the
           significance of detected changes.
 
-    plot: display figures. This parameter could be omitted or set to:
+    **plot:** display figures. This parameter could be omitted or set to:
           "on", "fig1", "fig2" or "off". The "fig1" option will display
           the input data and the estimated trend, plus the trend local
           change. The "fig2" option will display a graph with the
@@ -92,43 +92,43 @@ distance.threshold: the distance threshold value. This correspond to
           option displays both 'figure 1' and 'figure 2'. The "off"
           option displays no figure.
 
-_D_e_t_a_i_l_s:
+###Details:
 
      An object of the class "DBEST" is a list with elements depending
      on whether the generalization algorithm or change detection
      algorithm is used.
 
-_V_a_l_u_e:
+###Value:
 
-BreakpointNo: the number of breakpoints or changes detected.
+**BreakpointNo:** the number of breakpoints or changes detected.
 
-SegmentNo: the number of segments estimated by the algorithm.
+**SegmentNo:** the number of segments estimated by the algorithm.
 
-   Start: a list with numbers representing the starting points of the
+   **Start:** a list with numbers representing the starting points of the
           changes as time-steps.
 
-Duration: a list with numbers representing the durations of the changes
+**Duration:** a list with numbers representing the durations of the changes
           as time-steps.
 
-     End: a list with numbers representing the ending points of the
+     **End:** a list with numbers representing the ending points of the
           changes as time-steps.
 
-  Change: a list with the values of the changes.
+  **Change:** a list with the values of the changes.
 
-ChangeType: a list with the types of the changes as numbers which could
+**ChangeType:** a list with the types of the changes as numbers which could
           be 0 or 1. The numbers correspond to a non-abrupt change (0)
           or abrupt change (1).
 
-Significance: a list with the statistical significances of the changes
+**Significance:** a list with the statistical significances of the changes
           as numbers which could be 0 or 1. The numbers correspond to a
           statistically in-significant change (0) or significant change
           (1).
 
-    RMSE: the calculated Root Mean Squares Error of the fit.
+    **RMSE:** the calculated Root Mean Squares Error of the fit.
 
-     MAD: the calculated Maximum Absolute Difference of the fit.
+     **MAD:** the calculated Maximum Absolute Difference of the fit.
 
-_N_o_t_e:
+###Note:
 
      1) DBEST detects changes requested by the user, and determines the
      type of the detected changes based on the definition of abrupt
@@ -154,27 +154,27 @@ _N_o_t_e:
      of the test data below compared to figures 4 and 5 published in
      Jamali et al. 2015.
 
-_A_u_t_h_o_r(_s):
+###Author(s):
 
      Sadegh Jamali, Hristo Tomov
 
-_R_e_f_e_r_e_n_c_e_s:
+###References:
 
-     Jamali S, Jönsson P, Eklundh L, Ardö J, Seaquist J (2015).
+     *Jamali S, Jönsson P, Eklundh L, Ardö J, Seaquist J (2015).
      Detecting changes in vegetation trends using time series
      segmentation. Remote Sensing of Environment, 156, 182-195.
-     http://dx.doi.org/10.1016/j.rse.2014.09.010
+     http://dx.doi.org/10.1016/j.rse.2014.09.010*
 
-     Tomov H (2016). Automated temporal NDVI analysis over the Middle
+     *Tomov H (2016). Automated temporal NDVI analysis over the Middle
      East for the period 1982 – 2010.
-     http://lup.lub.lu.se/student-papers/record/8871893
+     http://lup.lub.lu.se/student-papers/record/8871893*
 
-_S_e_e _A_l_s_o:
+###See Also:
 
      ‘plot.DBEST’ for plotting of DBEST() results.
 
-_E_x_a_m_p_l_e_s:
-
+###Examples:
+```R
      data(NDVI.Site1)
      NDVI.Example1 <- ts(NDVI.Site1, start=1982, frequency=12)
      
@@ -248,4 +248,5 @@ _E_x_a_m_p_l_e_s:
                       breakpoints.no=3, first.level.shift=0.1, 
                       second.level.shift=0.2, duration=24, 
                       distance.threshold="default", alpha=0.05, plot="on")
+```
      
